@@ -10,40 +10,139 @@
 - `calculator.py` - Python файл с функциями
 - `config.json` - конфигурационный файл
 
+## Доступные ветки для практики (Available Practice Branches)
+
+### Текстовые конфликты (Text Conflicts)
+- `feature-hello-enthusiastic` - восторженное приветствие
+- `feature-hello-formal` - формальное приветствие
+
+### Конфликты в коде (Code Conflicts)
+- `feature-calc-divide` - добавляет функцию деления
+- `feature-calc-power` - добавляет функцию возведения в степень
+
+### Конфликты в конфигурации (Config Conflicts)
+- `feature-config-dev` - настройки для разработки
+- `feature-config-prod` - настройки для продакшена
+
 ## Как практиковаться (How to Practice)
 
 ### Сценарий 1: Простой текстовый конфликт
-1. Создайте ветку `feature-1`: `git checkout -b feature-1`
-2. Измените строку 3 в `hello.txt`
-3. Сделайте коммит: `git commit -am "Update line 3"`
-4. Вернитесь в main: `git checkout main`
-5. Создайте ветку `feature-2`: `git checkout -b feature-2`
-6. Измените ту же строку 3 в `hello.txt` по-другому
-7. Сделайте коммит: `git commit -am "Different update to line 3"`
-8. Попробуйте слить feature-1: `git merge feature-1`
-9. Разрешите конфликт и завершите слияние
+Попробуйте слить две ветки с изменениями в `hello.txt`:
 
-### Сценарий 2: Конфликт в коде
-1. Создайте ветку и измените функцию в `calculator.py`
-2. Создайте другую ветку и измените ту же функцию по-другому
-3. Попробуйте слить ветки и разрешите конфликт
+```bash
+# Создайте новую ветку для экспериментов
+git checkout -b practice-merge
 
-### Сценарий 3: Конфликт в конфигурации
-1. Измените параметры в `config.json` в разных ветках
-2. Слейте и разрешите конфликты JSON
+# Слейте первую ветку
+git merge feature-hello-enthusiastic
+
+# Теперь попробуйте слить вторую ветку - будет конфликт!
+git merge feature-hello-formal
+
+# Откройте hello.txt и разрешите конфликт
+# Файл будет содержать маркеры:
+# <<<<<<< HEAD
+# ... ваши изменения ...
+# =======
+# ... входящие изменения ...
+# >>>>>>> feature-hello-formal
+
+# После разрешения конфликта:
+git add hello.txt
+git commit -m "Resolve merge conflict"
+```
+
+### Сценарий 2: Конфликт в Python коде
+```bash
+git checkout copilot/train-github-conflicts
+git checkout -b practice-calculator
+
+# Слейте обе ветки с функциями
+git merge feature-calc-divide
+git merge feature-calc-power  # Конфликт!
+
+# Разрешите конфликт, убедившись что обе функции присутствуют
+# и код работает корректно
+git add calculator.py
+git commit -m "Merge both calculator features"
+```
+
+### Сценарий 3: Конфликт в JSON конфигурации
+```bash
+git checkout copilot/train-github-conflicts
+git checkout -b practice-config
+
+git merge feature-config-dev
+git merge feature-config-prod  # Конфликт!
+
+# Разрешите конфликт в JSON файле
+# Убедитесь что JSON остается валидным!
+git add config.json
+git commit -m "Merge config changes"
+```
+
+### Продвинутый сценарий: 3-way merge
+```bash
+# Создайте ситуацию со множественными конфликтами
+git checkout copilot/train-github-conflicts
+git checkout -b practice-complex
+
+git merge feature-hello-enthusiastic
+git merge feature-calc-divide
+git merge feature-config-dev
+
+# Теперь попробуйте слить противоречащие ветки
+git merge feature-hello-formal       # Конфликт в hello.txt
+git merge feature-calc-power         # Конфликт в calculator.py
+git merge feature-config-prod        # Конфликт в config.json
+```
 
 ## Полезные команды (Useful Commands)
 
-- `git status` - проверить статус
+- `git status` - проверить статус и увидеть конфликтующие файлы
 - `git diff` - посмотреть изменения
+- `git diff --ours` - посмотреть вашу версию
+- `git diff --theirs` - посмотреть входящую версию
 - `git merge <branch>` - слить ветку
-- `git merge --abort` - отменить слияние
+- `git merge --abort` - отменить слияние при конфликте
 - `git add <file>` - пометить конфликт как разрешенный
 - `git commit` - завершить слияние
+- `git log --graph --oneline --all` - визуализация веток
+- `git checkout --ours <file>` - принять вашу версию файла
+- `git checkout --theirs <file>` - принять их версию файла
 
 ## Советы (Tips)
 
-- Всегда читайте маркеры конфликтов: `<<<<<<<`, `=======`, `>>>>>>>`
-- Тщательно выбирайте, какие изменения оставить
-- Тестируйте код после разрешения конфликтов
-- Используйте `git log --graph --oneline --all` для визуализации веток
+1. **Читайте маркеры конфликтов:**
+   - `<<<<<<< HEAD` - начало ваших изменений
+   - `=======` - разделитель версий
+   - `>>>>>>> branch-name` - конец входящих изменений
+
+2. **Стратегии разрешения:**
+   - Принять только свои изменения
+   - Принять только их изменения
+   - Объединить оба изменения (часто лучший вариант)
+   - Создать новое решение
+
+3. **После разрешения:**
+   - Тщательно проверьте код
+   - Убедитесь что синтаксис правильный
+   - Протестируйте функциональность
+   - Удалите все маркеры конфликтов
+
+4. **Предотвращение конфликтов:**
+   - Чаще делайте pull/merge из основной ветки
+   - Разделяйте работу по разным файлам
+   - Согласуйте изменения с командой
+
+## Проверка понимания (Self-Check)
+
+После практики вы должны уметь:
+- [ ] Распознавать маркеры конфликтов в файлах
+- [ ] Выбирать правильную стратегию разрешения
+- [ ] Разрешать конфликты в текстовых файлах
+- [ ] Разрешать конфликты в коде
+- [ ] Разрешать конфликты в JSON/конфигурациях
+- [ ] Использовать git add для маркировки разрешенных конфликтов
+- [ ] Завершать слияние после разрешения всех конфликтов
+- [ ] Отменять слияние если что-то пошло не так
