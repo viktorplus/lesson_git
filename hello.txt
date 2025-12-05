@@ -1,0 +1,5 @@
+Hello World!
+This is a file for practicing Git merge conflicts.
+Line 3: Original content
+Line 4: More original content
+Line 5: Final line
