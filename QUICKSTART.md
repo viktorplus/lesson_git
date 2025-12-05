@@ -9,6 +9,17 @@ git clone https://github.com/viktorplus/lesson_git.git
 cd lesson_git
 ```
 
+## Шаг 1.5: Настройка (если ветки отсутствуют)
+
+Если при выполнении `git branch -a` вы не видите веток `feature-*`, запустите скрипт настройки:
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+Этот скрипт создаст все необходимые feature-ветки локально.
+
 ## Шаг 2: Просмотрите доступные ветки
 
 ```bash
