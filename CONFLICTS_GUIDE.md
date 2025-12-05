@@ -5,7 +5,7 @@
 ## Диаграмма веток (Branch Diagram)
 
 ```
-copilot/train-github-conflicts (base)
+main (base)
 │
 ├── feature-hello-enthusiastic     [изменяет строки 1, 3, 5 в hello.txt]
 ├── feature-hello-formal           [изменяет строки 1, 3, 5 в hello.txt]

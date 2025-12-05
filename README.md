@@ -48,7 +48,7 @@ chmod +x setup.sh
 
 ```bash
 # Создайте новую ветку для экспериментов
-git checkout -b practice-merge
+git checkout -b practice-merge main
 
 # Слейте первую ветку
 git merge feature-hello-enthusiastic
@@ -71,7 +71,7 @@ git commit -m "Resolve merge conflict"
 
 ### Сценарий 2: Конфликт в Python коде
 ```bash
-git checkout copilot/train-github-conflicts
+git checkout main
 git checkout -b practice-calculator
 
 # Слейте обе ветки с функциями
@@ -86,7 +86,7 @@ git commit -m "Merge both calculator features"
 
 ### Сценарий 3: Конфликт в JSON конфигурации
 ```bash
-git checkout copilot/train-github-conflicts
+git checkout main
 git checkout -b practice-config
 
 git merge feature-config-dev
@@ -101,7 +101,7 @@ git commit -m "Merge config changes"
 ### Продвинутый сценарий: 3-way merge
 ```bash
 # Создайте ситуацию со множественными конфликтами
-git checkout copilot/train-github-conflicts
+git checkout main
 git checkout -b practice-complex
 
 git merge feature-hello-enthusiastic
