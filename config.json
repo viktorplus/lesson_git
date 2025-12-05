@@ -1,0 +1,6 @@
+{
+  "app_name": "Training App",
+  "version": "1.0.0",
+  "debug": false,
+  "max_users": 100
+}
